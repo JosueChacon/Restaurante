@@ -88,6 +88,8 @@ Route::post('home/AperturarCaja', 'CajaController@Aperturar');
 Route::get('home/CerrarCaja', 'CajaController@CerrarCaja')->name('cerrarcaja');
 Route::post('home/CerrarCaja', 'CajaController@Cerrar');
 
+route::get('GenerarProgramacion', 'ProgramacionController@GenerarProgramacion')->name('GenerarProgramacion');
+
 //***************************** RUTAS PARA EL COCINERO
 Route::get('home/atenderPedidos', 'CPedidoController@listaConfirmados')->name('home.listaConfirmados');
 Route::get('home/atenderPedidos/{id}/atender', 'CPedidoController@mostrarPedido')->name('home.mostrarPedido');
@@ -122,12 +124,3 @@ route::post('CobrarPedido/{id}', 'ReciboController@Cobrado');
 
 route::get('home/ImprimirPedido/{id}', 'TPedidoController@ImprimirPedido')->name('imprimirTPedido');
 route::get('home/ImprimirPedidoEstado/{id}', 'TPedidoController@ImprimirPedidoEstado')->name('imprimirTPedidoEstado');
-
-
-
-
-
-
-
-
-

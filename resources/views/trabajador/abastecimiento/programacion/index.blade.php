@@ -7,9 +7,15 @@
     <div class="card">
         <div class="card-header border shadow">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-9">
                     <a class="form-control btn btn-primary" href="{{ route('programacion.create') }}"><i
-                            class="fas fa-plus-square"></i> Registrar Programación</a>
+                            class="fas fa-plus-square"></i> Registrar Programación
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a class="form-control btn btn-outline-success" href="{{ route('GenerarProgramacion') }}"><i
+                            class="fas fa-sync-alt"></i> Generar Programación
+                    </a>
                 </div>
             </div>
         </div>
@@ -40,7 +46,7 @@
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Hora</th>
                                     <th scope="col">Responsable</th>
-                                    <th scope="col" class="text-right">Nº Tipo plato</th>                                    
+                                    <th scope="col" class="text-right">Nº Tipo plato</th>
                                     <th scope="col" class="text-center">Acción</th>
                                 </tr>
                             </thead>
@@ -70,5 +76,5 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 @endsection

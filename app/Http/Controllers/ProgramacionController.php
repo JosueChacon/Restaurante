@@ -229,4 +229,37 @@ class ProgramacionController extends Controller
         }
         return view('cliente.operaciones.programacion_cli.index', compact('detalles', 'buscarpor', 'platos'));
     }
+
+    //Admin
+    public function GenerarProgramacion()
+    {
+        //Comprobar si ya hay una programacion hoy
+        $now = date('Y-m-d');
+        $programacion = programacion::where('estado', '=', '1')->orderBy('fecha', 'DESC')->first();
+        if ($programacion != null) {
+            if ($programacion->fecha->format('Y-m-d') == $now) {
+                return redirect()->route('programacion.index')->with('error', 'Solo se permite una programación por día');
+            }
+        }
+
+        $programacion = new Programacion();
+        $programacion->fecha = date_create();
+        $programacion->idtrabajador = Auth::user()->Persona->Trabajador->idtrabajador;
+        $programacion->estado = 1;
+        $programacion->save();
+
+        $idprogramacion = $programacion->idprogramacion;
+        $platos = Plato::where('estado', '=', '1')->get();
+
+        foreach ($platos as $plato) {
+            $detalle = new DProgramacion();
+            $detalle->idprogramacion = $idprogramacion;
+            $detalle->idplato = $plato->id;
+            $detalle->stock = 200;
+            $detalle->estado = 1;
+            $detalle->save();
+        }
+
+        return redirect()->route('programacion.index')->with('good', 'La programación se ha generado correctamente.');
+    }
 }
