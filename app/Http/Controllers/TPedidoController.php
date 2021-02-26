@@ -417,7 +417,6 @@ class TPedidoController extends Controller
         }
         $pdf = PDF::loadView('reportes.ImprimirPedidoEstado', compact('pedido', 'msj'));
         $pdf->setpaper([0, 0, 200, 450]);
-        // $pdf->setpaper([0,0,350, 600]);
         return $pdf->stream('ReciboImpreso_' . date('Ymd') . '.pdf');
     }
 }
