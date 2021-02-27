@@ -71,7 +71,7 @@
                                             <a target="_blank" href="{{ route('imprimirTPedido', $item->idpedido) }}"
                                                 style="margin-top: -7px" class="btn btn-sm btn-primary"><i
                                                     class="fas fa-print"></i>
-                                                Todo el pedido</a>
+                                                Imprimir</a>
                                         </td>
                                     </tr>
                                 @endforeach

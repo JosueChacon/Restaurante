@@ -18,7 +18,7 @@
 
 <body>
     {{-- margin-left: -10mm; margin-right: -10mm; margin-top: -5mm --}}
-    <div style="width: 100%; margin-left: -10mm; margin-right: -10mm; margin-top: -5mm" class="tipo-letra">
+    <div style="width: 100%; margin-left: -9mm; margin-right: -9mm; margin-top: -5mm" class="tipo-letra">
         <div style="text-align: center; font-size: 12pt">
             <span>***** Restaurant *****</span>
         </div>
@@ -26,7 +26,7 @@
             <span>Ruc: 00000000000</span>
         </div>
         <div style="text-align: center; font-size: 10pt; margin-top: 10pt">
-            <span>PEDIDO</span>
+            <span>COMANDA</span>
         </div>
         <div style="margin-top: 10pt">
             <span>Nº Pedido: {{ $pedido->formato($pedido->idpedido) }}</span>
@@ -45,7 +45,7 @@
             <span>Cliente de: MESA {{ $pedido->Reserva->Mesa->nromesa }}</span>
         </div>
         <div>
-            <span>------------------------------------------------------------------------------------------------------------------------------------</span>
+            <span>----------------------------------------------------------------</span>
         </div>
         <table style="width: 100%;">
             <thead>
@@ -70,7 +70,7 @@
             </tbody>
         </table>
         <div>
-            <span>------------------------------------------------------------------------------------------------------------------------------------</span>
+            <span>----------------------------------------------------------------</span>
         </div>
         <table style="width: 100%">
             <thead>
@@ -81,8 +81,20 @@
                 </tr>
             </thead>
         </table>
-        <br><br>
-        @if ($msj != '')
+        @if ($msj == '')
+            <table style="width: 100%">
+                <tbody>
+                    <tr>
+                        <td><strong>Observaciones:</strong></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ $pedido->GetObservacion() }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        @else
             <div style="margin-top: 5pt">
                 <span>{{ $msj }}.</span>
             </div>

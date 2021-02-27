@@ -67,14 +67,23 @@
                                                 style="margin-top: -7px" class="btn btn-sm btn-danger"><i
                                                     class="fas fa-check"></i>
                                                 Atender</a>
-                                            {{-- <a target="_blank" href="{{ route('imprimirTPedido', $item->idpedido) }}"
-                                                style="margin-top: -7px" class="btn btn-sm btn-primary"><i
-                                                    class="fas fa-print"></i>
-                                            </a> --}}
-                                            <a target="_blank" href="{{ route('imprimirTPedidoEstado', $item->idpedido) }}"
-                                                style="margin-top: -7px" class="btn btn-sm btn-primary"><i
-                                                    class="fas fa-print"></i>                                                    
+
                                             </a>
+                                            <abbr title="Imprimir Cocina" style="text-decoration: none; cursor: pointer">
+                                                <a href="{{ route('imprimirTPedidoEstado', $item->idpedido) }}"
+                                                    target="_blank" style="margin-top: -7px" class="btn btn-sm btn-success">
+                                                    <i class="fas fa-print"></i>
+                                                    Cocina
+                                                </a>
+                                            </abbr>
+                                            <abbr title="Imprimir Pre-Cuenta"
+                                                style="text-decoration: none; cursor: pointer">
+                                                <a href="{{ route('imprimirTPedido', $item->idpedido) }}" target="_blank"
+                                                    style="margin-top: -7px" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-print"></i>
+                                                    Pre-Cuenta
+                                                </a>
+                                            </abbr>
                                         </td>
                                     </tr>
                                 @endforeach

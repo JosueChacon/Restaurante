@@ -10,7 +10,7 @@ class Pedido extends Model
     public $timestamps = false;
     protected $primaryKey = 'idpedido';
     protected $fillable = [
-        'idcliente', 'fecha', 'estado', 'estado_delete', 'idtrabajador',
+        'idcliente', 'fecha', 'estado', 'estado_delete', 'idtrabajador', 'observacion'
     ];
 
     protected $dates = [
@@ -64,5 +64,11 @@ class Pedido extends Model
     public function Trabajador()
     {
         return $this->hasOne('App\Trabajador', 'idtrabajador', 'idtrabajador');
+    }
+
+    public function GetObservacion()
+    {
+        if ($this->observacion == null) return "Sin observaciones";
+        else return $this->observacion;
     }
 }

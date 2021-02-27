@@ -15,7 +15,7 @@ class ReporteAdminController extends Controller
         $total_productos = 0;
         foreach ($productos as $p) $total_productos += $p->stock;
         $pdf = PDF::loadView('reportes.ImprimirStockProducto', compact('productos', 'total_productos'));
-        $pdf->setpaper([0, 0, 200, 450]);
+        $pdf->setpaper([0, 0, 210, 450]);
         return $pdf->stream('Reporte_SAProductos-' . date('d-m-Y') . '.pdf');
     }
 
@@ -32,7 +32,7 @@ class ReporteAdminController extends Controller
             $total_platos += $detalle['stock'];
         }
         $pdf = PDF::loadView('reportes.ImprimirStockPlatos', compact('programacion', 'total_platos'));
-        $pdf->setpaper([0, 0, 200, 450]);
+        $pdf->setpaper([0, 0, 210, 450]);
         return $pdf->stream('Reporte_SAPlatos-' . date('d-m-Y') . '.pdf');
     }
 }

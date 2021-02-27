@@ -105,7 +105,7 @@ class TPedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //         
+        //                
         $pedido = new Pedido();
         $pedido->idcliente = $request->idcliente;
         $pedido->fecha = date_create();
@@ -114,6 +114,7 @@ class TPedidoController extends Controller
         $pedido->estado_delete = 1;
         $pedido->lugar = $request->lugar;
         $pedido->idtrabajador = $request->idtrabajador;
+        $pedido->observacion = $request->obs;
         $pedido->save();
 
         $idplato = $request->get('idplato');
@@ -403,8 +404,7 @@ class TPedidoController extends Controller
     {
         $pedido = Pedido::findorfail($id);
         $pdf = PDF::loadView('reportes.ImprimirPedido', compact('pedido'));
-        $pdf->setpaper([0, 0, 200, 450]);
-        // $pdf->setpaper([0,0,350, 600]);
+        $pdf->setpaper([0, 0, 210, 450]);
         return $pdf->stream('ReciboImpreso_' . date('Ymd') . '.pdf');
     }
 
@@ -416,7 +416,7 @@ class TPedidoController extends Controller
             $msj = "Nota: pedido atendido en su totalidad";
         }
         $pdf = PDF::loadView('reportes.ImprimirPedidoEstado', compact('pedido', 'msj'));
-        $pdf->setpaper([0, 0, 200, 450]);
+        $pdf->setpaper([0, 0, 210, 450]);
         return $pdf->stream('ReciboImpreso_' . date('Ymd') . '.pdf');
     }
 }

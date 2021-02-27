@@ -34,15 +34,21 @@
                                     style="width: 120px; height: 120px;"><br>
                             </abbr>
                         </a>
-                        MESA {{ $item->nromesa }}
+                        MESA {{ $item->nromesa }} <br>
                         @if ($item->compruebaEstadoMesa($item->mesa_id) == 'OCUPADA')
                             {{ session(['fuente' => 'HOME']) }}
-                            <a href="{{ route('ModificarPedido', $item->PedidoActivo()) }}"><i
-                                    class="fas fa-edit text-info"></i></a>
-                            {{-- <a href="{{ route('imprimirTPedido', $item->PedidoActivo()) }}" target="_Blank"><i
-                                    class="fas fa-print text-danger"></i></a> --}}
-                            <a href="{{ route('imprimirTPedidoEstado', $item->PedidoActivo()) }}" target="_Blank"><i
-                                    class="fas fa-print text-danger"></i></a>
+                            <abbr title="Editar Pedido" style="text-decoration: none; cursor: pointer">
+                                <a href="{{ route('ModificarPedido', $item->PedidoActivo()) }}"><i
+                                        class="fas fa-edit text-danger"></i></a>
+                            </abbr>
+                            <abbr title="Imprimir Cocina" style="text-decoration: none; cursor: pointer">
+                                <a href="{{ route('imprimirTPedidoEstado', $item->PedidoActivo()) }}" target="_Blank"><i
+                                        class="fas fa-print text-success"></i></a>
+                            </abbr>
+                            <abbr title="Imprimir Pre-Cuenta" style="text-decoration: none; cursor: pointer">
+                                <a href="{{ route('imprimirTPedido', $item->PedidoActivo()) }}" target="_Blank"><i
+                                        class="fas fa-print text-primary"></i></a>
+                            </abbr>
                         @endif
                     </div>
                 @endforeach

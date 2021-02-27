@@ -26,6 +26,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('home') }}"><i class="fas fa-home"></i> Inicio</a>          
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('programacion.index') }}"><i class="fas fa-check-circle"></i> Programaciones</a>          
+        </li>
       </ul>
     </nav>
 
@@ -33,8 +36,8 @@
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="{{ asset(auth()->user()->getRutaFoto()) }}" 
-            class="img-circle elevation-2" alt="User Image">
+            <img class="img-circle elevation-2" alt="User Image"
+            src="{{ asset(auth()->user()->getRutaFoto()) }}">
           </div>
           <div class="info">
             <label for="" style="color: white">Usuario:</label>

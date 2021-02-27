@@ -150,6 +150,14 @@
                     </div>
                 </div>
                 <div class="row pt-2">
+                    <div class="col-md-12">
+                        <label for="obs">Observaciones: </label>
+                        <textarea name="obs" id="obs" rows="3" class="form-control">
+
+                        </textarea>
+                    </div>                    
+                </div>
+                <div class="row pt-2">
                     <div class="col-sm-2">
                         <a href="{{ route('home') }}" class='form-control btn btn-danger'><i
                                 class='fas fa-arrow-left'></i>
@@ -271,7 +279,7 @@
     </div>
 @endsection
 @section('script')
-    <script src="/js/pedido-local.js?v=1"></script>
+    <script src="/js/pedido-local.js?v=2"></script>
     <script src="/js/datatables/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {

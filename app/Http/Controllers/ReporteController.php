@@ -29,7 +29,7 @@ class ReporteController extends Controller
         } else if ($persona->Trabajador != null) {
             //Recibo por trabajador
             $pdf = PDF::loadView('reportes.ImprimirRecibo', compact('recibo'));
-            $pdf->setpaper([0, 0, 200, 450]);
+            $pdf->setpaper([0, 0, 210, 450]);
             return $pdf->stream('Recibo-' . $recibo->nrorecibo . '.pdf');
         }
     }
@@ -70,7 +70,7 @@ class ReporteController extends Controller
             $tarjeta += $item->tarjeta;
         }
         $pdf = PDF::loadView('reportes.ImprimirVentasDiarias', compact('recibos_x_t', 'cont', 'total', 'efectivo', 'tarjeta'));        
-        $pdf->setpaper([0, 0, 200, 450]);
+        $pdf->setpaper([0, 0, 210, 450]);
         return $pdf->stream('Ventas-de-' . $now . '.pdf');
     }
 
@@ -92,7 +92,7 @@ class ReporteController extends Controller
                     $tarjeta += $item->tarjeta;
                 }
                 $pdf = PDF::loadView('reportes.ImprimirVentasDiarias', compact('recibos_x_t', 'total', 'efectivo', 'tarjeta'));
-                $pdf->setpaper([0, 0, 200, 450]);
+                $pdf->setpaper([0, 0, 210, 450]);
                 return $pdf->stream('Ventas-de-' . $now . '.pdf');
             }
         }

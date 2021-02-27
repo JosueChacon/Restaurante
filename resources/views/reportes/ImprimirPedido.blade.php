@@ -12,12 +12,12 @@
             font-family: Arial, Helvetica, sans-serif;
             color: black;
         }
+
     </style>
 </head>
 
 <body>
-    {{-- margin-left: -10mm; margin-right: -10mm; margin-top: -5mm --}}
-    <div style="width: 100%; margin-left: -10mm; margin-right: -10mm; margin-top: -5mm" class="tipo-letra">
+    <div style="width: 100%; margin-left: -9mm; margin-right: -9mm; margin-top: -5mm" class="tipo-letra">
         <div style="text-align: center; font-size: 12pt">
             <span>***** Restaurant *****</span>
         </div>
@@ -26,7 +26,7 @@
         </div>
         <div style="text-align: center; font-size: 10pt; margin-top: 10pt">
             <span>PEDIDO</span>
-        </div>    
+        </div>
         <div style="margin-top: 10pt">
             <span>Nº Pedido: {{ $pedido->formato($pedido->idpedido) }}</span>
         </div>
@@ -36,7 +36,7 @@
         </div>
         <div style="margin-top: 5pt">
             <span>Mesero: {{ $pedido->Trabajador->Persona->nombres_apellidos() }}</span>
-        </div>        
+        </div>
         <div style="margin-top: 5pt">
             <span>Estado: {{ $pedido->estado }}</span>
         </div>
@@ -44,7 +44,7 @@
             <span>Cliente de: MESA {{ $pedido->Reserva->Mesa->nromesa }}</span>
         </div>
         <div>
-            <span>------------------------------------------------------------------------------------------------------------------------------------</span>
+            <span>----------------------------------------------------------------</span>
         </div>
         <table style="width: 100%;">
             <thead>
@@ -69,7 +69,7 @@
             </tbody>
         </table>
         <div>
-            <span>------------------------------------------------------------------------------------------------------------------------------------</span>
+            <span>----------------------------------------------------------------</span>
         </div>
         <table style="width: 100%">
             <thead>
@@ -79,7 +79,19 @@
                 </tr>
             </thead>
         </table>
-        <br><br><br><br>
+        <table style="width: 100%">
+            <tbody>
+                <tr>
+                    <td><strong>Observaciones:</strong></td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ $pedido->GetObservacion() }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
         <div style="margin-top: 5pt; text-align: center">
             <span>!!! PEDIDO IMPRESO !!!</span>
         </div>

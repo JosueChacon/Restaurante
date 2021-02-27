@@ -84,6 +84,7 @@ class PedidoController extends Controller
         $pedido->estado = "Pendiente";
         $pedido->estado_delete = 1;
         $pedido->lugar = "DELIVERY";
+        // $pedido->observacion = $request->obs;
         $pedido->save();
         $idpedido = $pedido->idpedido;
         $i = 0;

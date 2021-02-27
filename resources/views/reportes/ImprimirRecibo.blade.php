@@ -16,8 +16,7 @@
 </head>
 
 <body>
-    {{-- margin-left: -10mm; margin-right: -10mm; margin-top: -5mm --}}
-    <div style="width: 100%; margin-left: -10mm; margin-right: -10mm; margin-top: -5mm" class="tipo-letra">
+    <div style="width: 100%; margin-left: -9mm; margin-right: -9mm; margin-top: -5mm" class="tipo-letra">
         <div style="text-align: center; font-size: 12pt">
             <span>***** Restaurant *****</span>
         </div>
@@ -44,7 +43,7 @@
             <span>Lugar: MESA {{ $recibo->DRecibo[0]->Pedido->Reserva->Mesa->nromesa }}</span>
         </div>
         <div>
-            <span>------------------------------------------------------------------------------------------------------------------------------------</span>
+            <span>----------------------------------------------------------------</span>
         </div>
         <table style="width: 100%;">
             <thead>
@@ -71,7 +70,7 @@
             </tbody>
         </table>
         <div>
-            <span>------------------------------------------------------------------------------------------------------------------------------------</span>
+            <span>----------------------------------------------------------------</span>
         </div>
         <table style="width: 100%">
             <thead>

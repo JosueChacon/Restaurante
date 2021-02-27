@@ -31,6 +31,12 @@
                     <input disabled class="form-control" type="text" value="{{ $pedido->estado }}">
                 </div>
             </div>
+            <div class="row pt-2">
+                <div class="col-md-12">
+                    <label for="">Observaciones:</label>
+                    <textarea rows="3" class="form-control" readonly>{{ $pedido->GetObservacion() }}</textarea>
+                </div>
+            </div>
             <i class="fas fa-task text-primary"></i>
             <font style="font-family: times new roman; font-size: 14pt">Detalles de pedido</font>
             <div class="row pt-2">
