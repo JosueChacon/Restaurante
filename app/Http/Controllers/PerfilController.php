@@ -31,19 +31,15 @@ class PerfilController extends Controller
         if ($user->TipoUsuario->idtipousuario == 1) { //1: TRABAJADOR
             $rol = $user->Persona->Trabajador->Cargo->descripcion;
             if ($rol == 'ADMINISTRADOR') {
-                $recibos = Recibo::where('estado', '=', '1')
-                    ->whereRaw('date(fecha)=' . "'$now'")
-                    ->get();
-                $total = 0;
-                foreach ($recibos as $item) {
-                    $total += $item->total;
-                }
-
-                $montoencaja = $total;
-                $cant_recibos = count($recibos);
+                $recibos = Recibo::where('estado', '=', '1')->whereRaw('date(fecha)=' . "'$now'")->get();
                 $trabajadores = Trabajador::all();
                 $clientes = Cliente::where('estado', '=', '1')->get();
-                return view('administrador.principalAdmin', compact('montoencaja', 'cant_recibos', 'trabajadores', 'clientes'));
+                $total = 0;
+                foreach ($recibos as $item) $total += $item->total;
+                $cant_recibos = count($recibos);
+                $cant_trabajadores = count($trabajadores);
+                $cant_clientes = count($clientes);
+                return view('administrador.principalAdmin', compact('total', 'cant_recibos', 'cant_trabajadores', 'cant_clientes'));
             } else if ($rol == 'MESERO') {
                 $mesas = Mesa::where('estado', '=', '1')->orderby('nromesa', 'DESC')->get();
                 $reservas = Reserva::where('estado_delete', '=', '1')->where('estado', '=', 'OCUPADA')

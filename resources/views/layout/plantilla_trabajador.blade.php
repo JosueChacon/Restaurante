@@ -23,19 +23,30 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="javascript:;" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Salir</a>          
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('home') }}"><i class="fas fa-home"></i> Inicio</a>          
+        </li>        
       </ul>
     </nav>
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <div class="brand-link">
+        <img  alt="AdminLTE Logo"
+        class="brand-image img-circle elevation-3"
+        src="/img/cargo.png" style="opacity: .8">
+       <span class="brand-text font-weight-light">{{ auth()->user()->Persona->Trabajador->Cargo['descripcion'] }}</span>
+      </div>
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="{{asset(auth()->user()->getRutaFoto())}}" class="img-circle elevation-2" alt="User Image">
+            <img class="img-circle elevation-2" alt="User Image"
+            src="{{ asset(auth()->user()->getRutaFoto()) }}">
           </div>
           <div class="info">
-            <label for="" style="color: white">Usuario:</label>
-            <u><a href="{{URL::to('home')}}">{{ auth()->user()->Persona->nombres }}</a></u>
-            <br><label for="" style="color: white">{{ auth()->user()->Persona->Trabajador->Cargo['descripcion'] }}</label>
+            <label for="" style="color: white">{{ auth()->user()->Persona->nombres }} <i class="fas fa-circle text-success"></i></label>            
           </div>
         </div>
 
@@ -260,7 +271,7 @@
         }
     });
 </script>
-  <script src="/js/ruta-api.js"></script>
+  <script src="/js/ruta-api.js"></script>  
   @yield('script')
 </body>
 

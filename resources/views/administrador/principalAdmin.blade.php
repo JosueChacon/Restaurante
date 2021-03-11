@@ -30,21 +30,15 @@
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3>
-                        S/. &nbsp;
-                        @if (isset($montoencaja))
-                            {{ number_format($montoencaja, 2) }}
-                        @else
-                            0.00
-                        @endif
+                        S/. &nbsp; {{ number_format($total, 2) }}
                     </h3>
-
                     <p>Ventas del día</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-dollar-sign"></i>
                 </div>
                 <a href="{{ URL::to('consultas/MontoEnCaja') }}" class="small-box-footer">
-                    Más detalles <i class="fas fa-arrow-circle-right"></i>
+                    Ver más... <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
         </div>
@@ -53,21 +47,15 @@
             <div class="small-box bg-warning">
                 <div class="inner">
                     <h3>
-                        # &nbsp;
-                        @if (isset($cant_recibos))
-                            {{ $cant_recibos }}
-                        @else
-                            0
-                        @endif
+                        # &nbsp; {{ $cant_recibos }}
                     </h3>
-
                     <p>Cantidad de Recibos</p>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-list-alt"></i>
+                    <i class="fas fa-file-signature"></i>
                 </div>
                 <a href="{{ URL::to('consultas/MontoEnCaja') }}" class="small-box-footer">
-                    Más detalles <i class="fas fa-arrow-circle-right"></i>
+                    Ver más... <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
         </div>
@@ -76,21 +64,15 @@
             <div class="small-box bg-primary">
                 <div class="inner">
                     <h3>
-                        # &nbsp;
-                        @if (isset($trabajadores))
-                            {{ count($trabajadores) }}
-                        @else
-                            0
-                        @endif
+                        # &nbsp; {{ $cant_trabajadores }}
                     </h3>
-
                     <p>Trabajadores</p>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-people-carry"></i>
                 </div>
                 <a href="{{ URL::to('consultas/MiGente') }}" class="small-box-footer">
-                    Más detalles <i class="fas fa-arrow-circle-right"></i>
+                    Ver más... <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
         </div>
@@ -99,12 +81,7 @@
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>
-                        # &nbsp;
-                        @if (isset($clientes))
-                            {{ count($clientes) }}
-                        @else
-                            0
-                        @endif
+                        # &nbsp; {{ $cant_clientes }}
                     </h3>
 
                     <p>Clientes</p>
@@ -113,19 +90,19 @@
                     <i class="fas fa-users"></i>
                 </div>
                 <a href="{{ URL::to('consultas/MisClientes') }}" class="small-box-footer">
-                    Más detalles <i class="fas fa-arrow-circle-right"></i>
+                    Ver más... <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <a href="{{ route('stockProductos') }}" target="_Blank" class="btn btn-primary form-control"><i
-                    class="fas fa-file-signature"></i> Reporte Stock Bebidas</a>
+        <div class="col-md-4 col-12 pt-2">
+            <a href="{{ route('stockProductos') }}" target="_Blank" class="btn btn-outline-primary form-control"><i
+                    class="fas fa-file-signature"></i> Reportar stock de bebidas</a>
         </div>
-        <div class="col-md-4">
-            <a href="{{ route('stockPlatos') }}" target="_Blank" class="btn btn-primary form-control"><i
-                class="fas fa-file-signature"></i> Reporte Stock Platos</a>
+        <div class="col-md-4 col-12 pt-2">
+            <a href="{{ route('stockPlatos') }}" target="_Blank" class="btn btn-outline-primary form-control"><i
+                    class="fas fa-file-signature"></i> Reportar stock de platos</a>
         </div>
     </div>
 @endsection
