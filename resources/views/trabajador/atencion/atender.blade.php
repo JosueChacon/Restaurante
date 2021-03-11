@@ -1,8 +1,8 @@
-@extends('layout.plantilla_trabajador')
+@extends($plantilla)
 @section('contenido')
-    <i class="fas fa-spinner text-primary"></i>
+    <i class="fas fa-check-circle text-primary"></i>
     <font style="font-family:Arial, Helvetica, sans-serif; font-size: 16pt">
-        Pedidos Confirmados, {{ date('d-m-Y') }}
+        Atendiendo Pedido de MESA {{ $pedido->Reserva->Mesa['nromesa'] }}
     </font>
     <div class="card">
         <div class="card-body">
@@ -32,14 +32,14 @@
                         <label>Cliente</label>
                         <input disabled class="form-control" type="text"
                             value="{{ $pedido->Cliente->Persona->nombres_apellidos() }}">
-                    </div>                                      
+                    </div>
                 </div>
                 <div class="row pt-2">
                     <div class="col-md-12">
                         <label for="">Observaciones:</label>
                         <textarea rows="3" class="form-control" readonly>{{ $pedido->GetObservacion() }}</textarea>
                     </div>
-                </div>  
+                </div>
                 <br>
                 <i class="fas fa-task text-primary"></i>
                 <font style="font-family: times new roman; font-size: 14pt">Detalles de pedido</font>
@@ -95,8 +95,14 @@
                     </div>
                 </div>
 
-                <a href="{{ route('AtenderPedidos') }}" class="btn btn-danger"><i class="fas fa-arrow-left"></i>
-                    Volver</a>
+                @if (session('fuenteAtencion') == 'Home')
+                    <a href="{{ route('home') }}" class="btn btn-danger"><i class="fas fa-arrow-left"></i>
+                        Volver</a>
+                @else
+                    <a href="{{ route('AtenderPedidos') }}" class="btn btn-danger"><i class="fas fa-arrow-left"></i>
+                        Volver</a>
+                @endif
+
                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Cambios
                 </button>
             </form>

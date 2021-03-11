@@ -23,7 +23,7 @@
     <div class="limiter">
         <div class="container-login100" style="background-image: url('/logindoc/images/bg-02.jpg');">
             <div class="wrap-login100">
-                <form method="POST" action="{{route('login')}}" class="login100-form">
+                <form method="POST" action="{{ route('login') }}" class="login100-form">
                     @csrf
                     <span class="login100-form-logo">
                         <img src="/img/icon/comida.svg" alt="">
@@ -35,25 +35,25 @@
 
                     <div class="form-group">
                         <input class="form-control @error('name') is-invalid @enderror" type="text"
-                            placeholder="Ingrese Usuario" maxlength="255" id="name" name="name" value="{{old('name')}}"
-                            required>
+                            placeholder="Ingrese Usuario" maxlength="255" id="name" name="name"
+                            value="{{ old('name') }}" required>
 
                         @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{$message}}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
 
                     <div class="form-group">
                         <input class="form-control @error('password') is-invalid @enderror" type="password" id="pass"
-                            name="password" placeholder="Ingrese Contraseña" maxlength="255" value="{{old('pass')}}"
+                            name="password" placeholder="Ingrese Contraseña" maxlength="255" value="{{ old('pass') }}"
                             required>
 
                         @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{$message}}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
 
@@ -64,9 +64,11 @@
                     </div>
 
                     <div class="text-center p-t-50">
-                        <a class="txt1" href="{{URL::to('/Registro')}}">
-                            ¿Nueva cuenta?
-                        </a>
+                        {{-- <a class="txt1" href="{{URL::to('/Registro')}}">
+                              ¿Nueva cuenta?  
+                            Bienvenido
+                        </a> --}}
+                        <span class="txt1">Bienvenido</span>
                     </div>
                 </form>
             </div>

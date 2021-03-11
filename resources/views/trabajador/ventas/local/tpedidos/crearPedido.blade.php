@@ -1,4 +1,4 @@
-@extends('layout.plantilla_trabajador')
+@extends($plantilla)
 @section('estilos')
     <link rel="stylesheet" href="/js/datatables/jquery.dataTables.min.css">
 @endsection
@@ -154,8 +154,8 @@
                         <label for="obs">Observaciones: </label>
                         <textarea name="obs" id="obs" rows="3" class="form-control">
 
-                        </textarea>
-                    </div>                    
+                            </textarea>
+                    </div>
                 </div>
                 <div class="row pt-2">
                     <div class="col-sm-2">
@@ -193,7 +193,7 @@
                                         <tr>
                                             <th>Foto</th>
                                             <th>Nombre</th>
-                                            <th>Tipo plato</th>
+                                            {{-- <th>Tipo plato</th> --}}
                                             <th class="text-right">P. Venta</th>
                                             <th class="text-right">Stock</th>
                                             <th class="text-center">Acción</th>
@@ -207,7 +207,7 @@
                                                         class="img-fluid" alt="Responsive image">
                                                 </td>
                                                 <td>{{ $f->Plato->nombre }}</td>
-                                                <td>{{ $f->Plato->tipoplato->descripcion }}</td>
+                                                {{-- <td>{{ $f->Plato->tipoplato->descripcion }}</td> --}}
                                                 <td>S/. {{ $f->Plato->p_venta }}</td>
                                                 <td>{{ $f->stock }}</td>
                                                 <td>
@@ -289,11 +289,11 @@
                 },
                 columnDefs: [{
                         "className": "text-right",
-                        "targets": [3, 4]
+                        "targets": [2, 3]
                     },
                     {
                         "className": "text-center",
-                        "targets": 5
+                        "targets": 4
                     }
                 ]
             })
@@ -302,6 +302,11 @@
                     "url": "/js/datatables/Spanish.json",
                 },
             });
+            $('#clave').keypress(function(e) {
+                if (e.which == 13) {
+                    confirmarClave()
+                }
+            })
         });
 
     </script>

@@ -1,4 +1,4 @@
-@extends('layout.plan_cajero')
+@extends($plantilla)
 @section('contenido')
     <i class="fas fa-spinner text-primary"></i>
     <font style="font-family:Arial, Helvetica, sans-serif; font-size: 16pt">

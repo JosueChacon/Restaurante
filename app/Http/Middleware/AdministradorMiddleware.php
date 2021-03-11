@@ -15,12 +15,14 @@ class AdministradorMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $trabajador = auth()->user()->Persona->Trabajador;
-        if ($trabajador != null) {
-            if ($trabajador->Cargo->descripcion == 'ADMINISTRADOR') {                
-                return $next($request);
-            }
-        }
-        return redirect('/');
+        // $trabajador = auth()->user()->Persona->Trabajador;
+        // if ($trabajador != null) {
+        //     if ($trabajador->Cargo->descripcion == 'ADMINISTRADOR') {                
+        //         return $next($request);
+        //     }
+        // }
+        // return redirect('/');
+
+        return $next($request);
     }
 }

@@ -52,28 +52,7 @@ class User extends Authenticatable
     public function Persona()
     {
         return $this->hasOne('App\Persona', 'idpersona', 'idpersona');
-    }
-
-    //Obtener plantilla
-    public function ObtenerPlantilla()
-    {
-        $tipo = auth()->user()->TipoUsuario->descripcion;
-        if ($tipo == 'TRABAJADOR') {
-            $rol = auth()->user()->Persona->Trabajador->Cargo->descripcion;
-            if ($rol == 'ADMINISTRADOR') {
-                $plantilla = 'layout.plantilla_admin';
-            } else if ($rol == 'TRABAJADOR') {
-                $plantilla = 'layout.plantilla_trabajador';
-            } else if ($rol == 'COCINERO') {
-                $plantilla = 'layout.plan_cocinero';
-            } else if ($rol == 'CAJERO'){
-                $plantilla = 'layout.plan_cajero';
-            }
-        } else {
-            $plantilla = 'layout.plantilla_cliente';
-        }
-        return $plantilla;
-    }
+    } 
 
     public function Caja()
     {

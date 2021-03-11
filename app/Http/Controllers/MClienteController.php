@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Cliente;
 use App\Persona;
+use App\Traits\util;
 use Illuminate\Http\Request;
 
 class MClienteController extends Controller
 {
+    use util;
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +32,8 @@ class MClienteController extends Controller
      */
     public function create()
     {
-        //
-        return view('trabajador.clientes.create');
+        $plantilla = $this->ObtenerPlantilla();
+        return view('trabajador.clientes.create', compact('plantilla'));
     }
 
     /**
@@ -72,9 +79,9 @@ class MClienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $plantilla = $this->ObtenerPlantilla();
         $cliente = Cliente::findorfail($id);
-        return view('trabajador.clientes.edit', compact('cliente'));
+        return view('trabajador.clientes.edit', compact('plantilla', 'cliente'));
     }
 
     /**
@@ -96,7 +103,7 @@ class MClienteController extends Controller
         $persona->estado = 1;
         $persona->dni = $request->dni;
         $persona->email = $request->email;
-        $persona->save();        
+        $persona->save();
         return redirect()->route('consultas.clientes');
     }
 

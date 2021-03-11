@@ -12,12 +12,14 @@ use App\Recibo;
 use App\Reserva;
 use App\Tipo;
 use App\TipoPago;
+use App\Traits\util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ReciboController extends Controller
 {
+    use util;
     public function __construct()
     {
         $this->middleware('auth');
@@ -220,8 +222,8 @@ class ReciboController extends Controller
             ->whereRaw('date(fecha)=' . "'$now'")
             ->paginate(10);
         $total = 0;
-        $efectivo=0;
-        $tarjeta=0;
+        $efectivo = 0;
+        $tarjeta = 0;
         foreach ($recibos_x_t as $item) {
             $total += $item->total;
             $efectivo += $item->efectivo;
@@ -250,6 +252,19 @@ class ReciboController extends Controller
     //
     public function CobrarPedido($id)
     {
+        $pedido = Pedido::findorfail($id);
+        if ($pedido->estado == "Pagado") {
+            return redirect()->route('home')->with('error', 'El pedido ya ha sido pagado');
+        }
+
+        $plantilla = $this->ObtenerPlantilla();
+        $trabajador = auth()->user()->Persona->Trabajador;
+        $cargo = $trabajador->Cargo;
+        if ($cargo->descripcion == "ADMINISTRADOR") {
+            $pedido = Pedido::findorfail($id);
+            return view('cajero.cobrarpedido', compact('plantilla', 'pedido'));
+        }
+
         $caja = Caja::where('estado_delete', '=', '1')
             ->where('id', '=', Auth::id())->first();
 
@@ -265,9 +280,9 @@ class ReciboController extends Controller
                     ->with('error', 'La caja ya ha sido cerrada, no puede emitir recibos');
             }
         }
-        
+
         $pedido = Pedido::findorfail($id);
-        return view('cajero.cobrarpedido', compact('pedido'));
+        return view('cajero.cobrarpedido', compact('plantilla', 'pedido'));
     }
 
     public function Cobrado(Request $request, $id)
@@ -287,9 +302,14 @@ class ReciboController extends Controller
         // $recibo->total = $request->total_env;
         $recibo->total = $pedido->Total($pedido->DPedido);
         $recibo->estado = 1;
-        $recibo->idtipopago = 1; //$request->idtipopago;
+        // $recibo->idtipopago = 1; //$request->idtipopago;
         $recibo->efectivo = $request->efectivo;
         $recibo->tarjeta = $request->tarjeta;
+
+        if ($recibo->efectivo == $recibo->total) $recibo->idtipopago = 1;
+        else if ($recibo->tarjeta == $recibo->total) $recibo->idtipopago = 2;
+        else $recibo->idtipopago = 3;
+
         $recibo->save();
 
         // $idpedido = $request->get('idpedido');
@@ -322,9 +342,12 @@ class ReciboController extends Controller
         $numeracion = Parametro::formato($dat[1] + 1);
         Parametro::ActualizarNumero($recibo->tipo_id, $numeracion);
 
+        $trabajador = auth()->user()->Persona->Trabajador;
+        $cargo = $trabajador->Cargo;
+        if ($cargo->descripcion == "ADMINISTRADOR") {
+            return redirect()->route('home')->with('good', 'Pedido Cobrado');
+        }
+
         return redirect()->route('consultas.recibos')->with('good', 'Recibo Registrado');
     }
-
-
-    
 }

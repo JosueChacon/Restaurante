@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Categoria;
+use App\Traits\util;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
+    use util;
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +21,9 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        $plantilla = $this->ObtenerPlantilla();
         $categorias = Categoria::where('estado', '=', '1')->get();
-        return view('trabajador.abastecimiento.categorias.index', compact('categorias'));
+        return view('trabajador.abastecimiento.categorias.index', compact('plantilla', 'categorias'));
     }
 
     /**
@@ -26,8 +33,8 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
-        return view('trabajador.abastecimiento.categorias.create');
+        $plantilla = $this->ObtenerPlantilla();
+        return view('trabajador.abastecimiento.categorias.create', compact('plantilla'));
     }
 
     /**
@@ -75,9 +82,9 @@ class CategoriaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $plantilla = $this->ObtenerPlantilla();
         $categoria = Categoria::findorfail($id);
-        return view('trabajador.abastecimiento.categorias.edit', compact('categoria'));
+        return view('trabajador.abastecimiento.categorias.edit', compact('plantilla', 'categoria'));
     }
 
     /**
@@ -122,8 +129,10 @@ class CategoriaController extends Controller
         return redirect()->route('categoria.index')->with('good', 'Categoría Eliminada');;
     }
 
-    public function confirmar($id){        
-        $categoria=Categoria::findOrfail($id);
-        return view('trabajador.abastecimiento.categorias.confirmar', compact('categoria'));
+    public function confirmar($id)
+    {
+        $plantilla = $this->ObtenerPlantilla();
+        $categoria = Categoria::findOrfail($id);
+        return view('trabajador.abastecimiento.categorias.confirmar', compact('plantilla', 'categoria'));
     }
 }

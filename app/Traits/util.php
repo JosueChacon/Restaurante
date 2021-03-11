@@ -60,4 +60,22 @@ trait util
             return "diciembre";
         }
     }
+
+    public function ObtenerPlantilla()
+    {
+        $tipo = auth()->user()->TipoUsuario->descripcion;
+        if ($tipo == 'TRABAJADOR') {
+            $rol = auth()->user()->Persona->Trabajador->Cargo->descripcion;
+            if ($rol == 'ADMINISTRADOR') { //Rol: Administrador
+                $plantilla = 'layout.plantilla_admin';
+            } else if ($rol == 'MESERO') { //Rol: Mesero
+                $plantilla = 'layout.plantilla_trabajador';
+            } else if ($rol == 'COCINERO') { //Rol: Cocinero
+                $plantilla = 'layout.plan_cocinero';
+            } else if ($rol == 'CAJERO') { //Rol: Cajero
+                $plantilla = 'layout.plan_cajero'; 
+            }
+        } else $plantilla = 'layout.plantilla_cliente';
+        return $plantilla;
+    }    
 }

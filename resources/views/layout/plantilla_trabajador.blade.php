@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Restaurant en Línea - Trabajador</title>
+  <title>Restaurant .::Mesero</title>
   <link rel="icon" type="image/png" href="/img/icon/empleado.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -24,11 +24,13 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="javascript:;" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Salir</a>          
+          <a class="nav-link" href="{{ route('home') }}"><i class="fas fa-home"></i> 
+            <abbr class="d-none d-sm-block float-right" style="text-decoration: none">&nbsp;Inicio</abbr>
+          </a>          
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('home') }}"><i class="fas fa-home"></i> Inicio</a>          
-        </li>        
+          <a class="nav-link text-red" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Salir</a>          
+        </li>                 
       </ul>
     </nav>
 
@@ -52,60 +54,7 @@
 
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-header">ATENCIÓN</li>
-            {{-- <li class="nav-item">
-              <a href="{{route('pedidos.create')}}" class="nav-link">
-                <i class="nav-icon fas fa-motorcycle"></i>
-                <p>Delivery</p>
-              </a>
-            </li> --}}
-            {{-- <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-folder-open"></i>
-                <p>
-                  Abastecimiento
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{ route('mesas.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-chevron-circle-right"></i>
-                    <p>Mesas</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ URL::to('abastecimiento/tipoplato') }}" class="nav-link">
-                    <i class="nav-icon fas fa-chevron-circle-right"></i>
-                    <p>Tipos de Plato</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ URL::to('abastecimiento/plato') }}" class="nav-link">
-                    <i class="nav-icon fas fa-chevron-circle-right"></i>
-                    <p>Platos</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ URL::to('abastecimiento/categoria') }}" class="nav-link">
-                    <i class="nav-icon fas fa-chevron-circle-right"></i>
-                    <p>Categorías</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ URL::to('abastecimiento/producto') }}" class="nav-link">
-                    <i class="nav-icon fas fa-chevron-circle-right"></i>
-                    <p>Productos</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ URL::to('abastecimiento/programacion') }}" class="nav-link">
-                    <i class="nav-icon fas fa-chevron-circle-right"></i>
-                    <p>Programación</p>
-                  </a>
-                </li>
-              </ul>
-            </li>             --}}
+            <li class="nav-header">ATENCIÓN</li>            
             <li class="nav-item">
               <a href="{{ route('home') }}" class="nav-link">
                 <i class="nav-icon fas fa-square"></i>

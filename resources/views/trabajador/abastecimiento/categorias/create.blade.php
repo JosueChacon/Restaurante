@@ -1,4 +1,4 @@
-@extends('layout.plantilla_admin')
+@extends($plantilla)
 @section('contenido')
     <div class="card">
         <div class="card-header">

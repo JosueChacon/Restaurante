@@ -39,10 +39,10 @@
                             <th scope="col">Nº Recibo</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Cliente</th>
-                            <th scope="col">Teléfono</th>
+                            {{-- <th scope="col">Teléfono</th> --}}
                             <th scope="col">Cajero</th>
                             <th>Pago</th>
-                            <th class="text-right">Total</th>
+                            <th class="text-right">Total S/.</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,10 +52,10 @@
                                 <td>{{ $item->nrorecibo }}</td>
                                 <td>{{ $item->fecha->format('d-m-Y  h:i a') }}</td>
                                 <td>{{ $item->Cliente->Persona->nombres_apellidos() }}</td>
-                                <td>{{ $item->Cliente->Persona->celular }}</td>
+                                {{-- <td>{{ $item->Cliente->Persona->celular }}</td> --}}
                                 <td>{{ $item->Trabajador->Persona->nombres_apellidos() }}</td>
                                 <td>{{ $item->TipoPago->descripcion }}</td>
-                                <td class="text-right">S/.&nbsp; {{ $item->total }}</td>
+                                <td class="text-right">{{ number_format($item->total, 2) }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -66,11 +66,11 @@
                 <div class="col-md-8">
                 </div>
                 <div class="col-md-2 text-right" style="padding-top: 5px">
-                    <label for="">Importe total:</label>
+                    <label for="">Importe total S/.</label>
                 </div>
                 <div class="col-md-2">
                     <input type="text" class="form-control text-right" readonly="readonly"
-                        value="S/.&nbsp; {{ number_format($total, 2) }}">
+                        value="{{ number_format($total, 2) }}">
                 </div>
             </div>
         </div>

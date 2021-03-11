@@ -15,7 +15,7 @@ class CajaController extends Controller
     use util;
     public function AperturarCaja()
     {
-        $plantilla = auth()->user()->ObtenerPlantilla();
+        $plantilla = $this->ObtenerPlantilla();
         if ($plantilla == 'layout.plan_cajero') {
             $cajas = Caja::where('estado_delete', '=', '1')
                 ->where('id', '=', Auth::id())->get();
@@ -82,7 +82,7 @@ class CajaController extends Controller
 
     public function CerrarCaja(Request $request)
     {
-        $plantilla = auth()->user()->ObtenerPlantilla();
+        $plantilla = $this->ObtenerPlantilla();
         //Si es cajero... mostrar sólo sus datos
         if ($plantilla == 'layout.plan_cajero') {
             $cajas = Caja::where('estado_delete', '=', '1')

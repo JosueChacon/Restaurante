@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Mesa;
 use App\Reserva;
+use App\Traits\util;
 use Illuminate\Http\Request;
 
 class MesaController extends Controller
 {
+    use util;
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('admin');
+       
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('layout.plantilla_trabajador')
+@extends($plantilla)
 @section('contenido')
 <br>
 <div class="card">

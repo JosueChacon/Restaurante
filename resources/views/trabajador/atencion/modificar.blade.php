@@ -1,4 +1,4 @@
-@extends('layout.plantilla_trabajador')
+@extends($plantilla)
 @section('estilos')
     <link rel="stylesheet" href="/js/datatables/jquery.dataTables.min.css">
 @endsection

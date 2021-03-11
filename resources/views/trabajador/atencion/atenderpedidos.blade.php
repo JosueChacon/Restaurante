@@ -1,8 +1,8 @@
-@extends('layout.plantilla_trabajador')
+@extends($plantilla)
 @section('contenido')
     <i class="fas fa-spinner text-primary"></i>
     <font style="font-family:Arial, Helvetica, sans-serif; font-size: 16pt">
-        Pedidos Confirmados, {{ date('d-m-Y') }}
+        Pedidos Pendientes, {{ date('d-m-Y') }}
     </font>
     <div class="card">
         <div class="card-body border shadow">
@@ -63,6 +63,7 @@
                                         <td>{{ $item->estado }}</td>
                                         <td class="text-right">S/. {{ $item->Total($item->DPedido) }}</td>
                                         <td class="text-center">
+                                            {{ session(['fuenteAtencion' => 'Listado']) }}
                                             <a href="{{ route('AtenderPedido', $item->idpedido) }}"
                                                 style="margin-top: -7px" class="btn btn-sm btn-danger"><i
                                                     class="fas fa-check"></i>

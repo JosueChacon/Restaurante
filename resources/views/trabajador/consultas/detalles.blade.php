@@ -1,9 +1,12 @@
-@extends('layout.plantilla_trabajador')
+@extends($plantilla)
 @section('contenido')
-    <br>
     <div class="card">
+       
         <div class="card-header">
-            <font style="font-family: times new roman; font-size: 18pt">Datos de pedido </font>
+            <i class="fas fa-list text-success"></i>
+            <font style="font-family:Arial, Helvetica, sans-serif; font-size: 16pt">
+                Pedido de MESA {{ $pedido->Reserva->Mesa['nromesa'] }}
+            </font>
         </div>
         <div class="card-body">
             <div class="row">

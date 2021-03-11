@@ -29,10 +29,12 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
                 <div class="inner">
+                    <span>Ventas del día</span>
                     <h3>
-                        S/. &nbsp; {{ number_format($total, 2) }}
-                    </h3>
-                    <p>Ventas del día</p>
+                        <span style="font-size: 18pt">
+                            S/. &nbsp; {{ number_format($total, 2) }}
+                        </span>
+                    </h3>                    
                 </div>
                 <div class="icon">
                     <i class="fas fa-dollar-sign"></i>
@@ -46,10 +48,12 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-warning">
                 <div class="inner">
+                    <span>Recibos Emitidos</span>
                     <h3>
-                        # &nbsp; {{ $cant_recibos }}
+                        <span style="font-size: 18pt">
+                            # &nbsp; {{ $cant_recibos }}
+                        </span>
                     </h3>
-                    <p>Cantidad de Recibos</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-file-signature"></i>
@@ -63,10 +67,12 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-primary">
                 <div class="inner">
+                    <span>Trabajadores</span>
                     <h3>
-                        # &nbsp; {{ $cant_trabajadores }}
+                        <span style="font-size: 18pt">
+                            # &nbsp; {{ $cant_trabajadores }}
+                        </span>                        
                     </h3>
-                    <p>Trabajadores</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-people-carry"></i>
@@ -80,11 +86,12 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-info">
                 <div class="inner">
+                    <span>Clientes</span>
                     <h3>
-                        # &nbsp; {{ $cant_clientes }}
+                        <span style="font-size: 18pt">
+                            # &nbsp; {{ $cant_clientes }}
+                        </span>                          
                     </h3>
-
-                    <p>Clientes</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-users"></i>

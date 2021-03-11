@@ -6,11 +6,13 @@ use App\DPedido;
 use App\Pedido;
 use App\Programacion;
 use App\Trabajador;
+use App\Traits\util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PedidoController extends Controller
 {
+    use util;
     public function __construct()
     {
         $this->middleware('auth');
@@ -178,7 +180,7 @@ class PedidoController extends Controller
 
     public function listaPedidos(Request $request)
     {
-        //
+        $plantilla = $this->ObtenerPlantilla();
         $cbxtipo = $request->cbxtipo;
         $idtrabajador = $request->idtrabajador;
 
@@ -206,14 +208,15 @@ class PedidoController extends Controller
             }
         }
 
-        $meseros = Trabajador::where('idcargo', '=', '2')->get();
-        return view('trabajador.consultas.pedidos', compact('pedidos', 'cbxtipo', 'idtrabajador', 'meseros'));
+        $meseros = Trabajador::where('idcargo', '=', '2')->where('estado', '=', '1')->get();        
+        return view('trabajador.consultas.pedidos', compact('plantilla', 'pedidos', 'cbxtipo', 'idtrabajador', 'meseros'));
     }
 
     public function detalles($id)
     {
+        $plantilla = $this->ObtenerPlantilla();
         $pedido = pedido::findorfail($id);
-        return view('trabajador.consultas.detalles', compact('pedido'));
+        return view('trabajador.consultas.detalles', compact('plantilla', 'pedido'));
     }
 
     public function listaPendientes()

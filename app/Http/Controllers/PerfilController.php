@@ -26,6 +26,8 @@ class PerfilController extends Controller
 
     public function mostrarFrmInicio(Request $request)
     {
+        $plantilla = $this->ObtenerPlantilla();
+
         $user = auth()->user();
         $now = date('Y-m-d');
         if ($user->TipoUsuario->idtipousuario == 1) { //1: TRABAJADOR
@@ -39,50 +41,56 @@ class PerfilController extends Controller
                 $cant_recibos = count($recibos);
                 $cant_trabajadores = count($trabajadores);
                 $cant_clientes = count($clientes);
-                return view('administrador.principalAdmin', compact('total', 'cant_recibos', 'cant_trabajadores', 'cant_clientes'));
+                return view('administrador.principalAdmin', compact('plantilla', 'total', 'cant_recibos', 'cant_trabajadores', 'cant_clientes'));
             } else if ($rol == 'MESERO') {
                 $mesas = Mesa::where('estado', '=', '1')->orderby('nromesa', 'DESC')->get();
                 $reservas = Reserva::where('estado_delete', '=', '1')->where('estado', '=', 'OCUPADA')
                     ->whereraw('date(fecha)="' . date('Y-m-d') . '"')->get();
-                return view('trabajador.p_trabajador', compact('mesas', 'reservas'));
+                return view('trabajador.p_trabajador', compact('plantilla', 'mesas', 'reservas'));
             } else if ($rol == 'COCINERO') {
                 $now = date('Y-m-d');
                 $pedidos = Pedido::where('estado_delete', '=', '1')
                     ->where('estado', '=', 'Confirmado')
                     ->whereRaw('date(fecha) =' . "'$now'")
                     ->paginate(8);
-                return view('cocinero.index', compact('pedidos'));
+                return view('cocinero.index', compact('plantilla', 'pedidos'));
             } else if ($rol == 'CAJERO') {
                 $idtrabajador = $request->idtrabajador;
 
                 $pedidos = pedido::where('estado_delete', '=', '1')
                     ->whereraw('date(fecha)="' . date('Y-m-d') . '"')
-                    ->where('estado', '=', 'Atendido')->orderBy('fecha', 'DESC')
+                    ->whereraw("(estado = 'Atendido' or estado = 'Confirmado')")
+                    ->orderby('fecha', 'desc')
+                    // ->where('estado', '=', 'Atendido')->orderBy('fecha', 'DESC')
                     ->get();
 
                 if ($idtrabajador != null) {
                     if ($idtrabajador == 0) {
                         $pedidos = pedido::where('estado_delete', '=', '1')
                             ->whereraw('date(fecha)="' . date('Y-m-d') . '"')
-                            ->where('estado', '=', 'Atendido')->orderBy('fecha', 'DESC')
+                            ->whereraw("(estado = 'Atendido' or estado = 'Confirmado')")
+                            ->orderby('fecha', 'desc')
+                            // ->where('estado', '=', 'Atendido')->orderBy('fecha', 'DESC')
                             ->get();
                     } else {
                         $pedidos = pedido::where('estado_delete', '=', '1')
                             ->whereraw('date(fecha)="' . date('Y-m-d') . '"')
-                            ->where('estado', '=', 'Atendido')->orderBy('fecha', 'DESC')
+                            ->whereraw("(estado = 'Atendido' or estado = 'Confirmado')")
+                            ->orderby('fecha', 'desc')
+                            // ->where('estado', '=', 'Atendido')->orderBy('fecha', 'DESC')
                             ->where('idtrabajador', '=', $idtrabajador)
                             ->get();
                     }
                 }
 
                 $meseros = Trabajador::where('idcargo', '=', '2')->get();
-                return view('cajero.index', compact('pedidos', 'idtrabajador', 'meseros'));
+                return view('cajero.index', compact('plantilla', 'pedidos', 'idtrabajador', 'meseros'));
             }
         } else { //2: CLIENTE
             $prog = Programacion::where('estado', '=', '1')
                 ->whereRaw('date(fecha)=' . "'$now'")
                 ->first();
-            return view('cliente.p_cliente', compact('prog'));
+            return view('cliente.p_cliente', compact('plantilla', 'prog'));
         }
     }
 

@@ -11,6 +11,7 @@ use App\Producto;
 use App\Programacion;
 use App\Reserva;
 use App\Trabajador;
+use App\Traits\util;
 use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Hash;
 
 class TPedidoController extends Controller
 {
+    use util;
     public function __construct()
     {
         $this->middleware('auth');
@@ -42,7 +44,7 @@ class TPedidoController extends Controller
      */
     public function create()
     {
-        //
+        $plantilla = $this->ObtenerPlantilla();
         $now = date('Y-m-d');
         $prog = Programacion::where('estado', '=', '1')->orderBy('fecha', 'DESC')->first();
         if ($prog != null) {
@@ -61,11 +63,12 @@ class TPedidoController extends Controller
         }
 
         $productos = Producto::where('estado', '=', '1')->get();
-        return view('trabajador.ventas.delivery.crearPedido', compact('nropedido', 'clientes', 'prog', 'productos'));
+        return view('trabajador.ventas.delivery.crearPedido', compact('plantilla', 'nropedido', 'clientes', 'prog', 'productos'));
     }
 
     public function crearPedido($mesa_id)
     {
+        $plantilla = $this->ObtenerPlantilla();
         $mesa = Mesa::findorfail($mesa_id);
         $now = date('Y-m-d');
         $reserva = Reserva::whereRaw('date(fecha)=' . "'$now'")
@@ -74,7 +77,9 @@ class TPedidoController extends Controller
             ->first();
 
         if ($reserva != null) {
-            return redirect()->route('home')->with('error', 'No puede reservar, la MESA ' . $mesa->nromesa . ' está ocupada, Elija otra mesa');
+            // session('fuente') = "Home";                  
+            return redirect()->route('AtenderPedido', $reserva->idpedido);
+            // return redirect()->route('home')->with('error', 'No puede reservar, la MESA ' . $mesa->nromesa . ' está ocupada, Elija otra mesa');
         }
 
         $prog = Programacion::where('estado', '=', '1')->orderBy('fecha', 'DESC')->first();
@@ -93,8 +98,8 @@ class TPedidoController extends Controller
             $nropedido = $pedido->formato($pedido->idpedido + 1);
         }
 
-        $productos = Producto::where('estado', '=', '1')->get();
-        return view('trabajador.ventas.local.tpedidos.crearPedido', compact('nropedido', 'mesa', 'clientes', 'prog', 'productos'));
+        $productos = Producto::where('estado', '=', '1')->get();      
+        return view('trabajador.ventas.local.tpedidos.crearPedido', compact('plantilla', 'nropedido', 'mesa', 'clientes', 'prog', 'productos'));
     }
 
     /**
@@ -229,6 +234,7 @@ class TPedidoController extends Controller
 
     public function AtenderPedidos(Request $request)
     {
+        $plantilla = $this->ObtenerPlantilla();
         $idtrabajador = $request->idtrabajador;
 
         $pedidos = pedido::where('estado_delete', '=', '1')
@@ -252,13 +258,15 @@ class TPedidoController extends Controller
         }
 
         $meseros = Trabajador::where('idcargo', '=', '2')->where('estado', '=', '1')->get();
-        return view('trabajador.atencion.atenderpedidos', compact('pedidos', 'idtrabajador', 'meseros'));
+        return view('trabajador.atencion.atenderpedidos', compact('plantilla', 'pedidos', 'idtrabajador', 'meseros', 'plantilla'));
     }
+
 
     public function Atender($id)
     {
+        $plantilla = $this->ObtenerPlantilla();
         $pedido = Pedido::findorfail($id);
-        return view('trabajador.atencion.atender', compact('pedido'));
+        return view('trabajador.atencion.atender', compact('plantilla', 'pedido', 'fuente'));
     }
 
     public function Atendido(Request $request, $id)
@@ -289,6 +297,7 @@ class TPedidoController extends Controller
     //
     public function ModificarPedidos(Request $request)
     {
+        $plantilla = $this->ObtenerPlantilla();
         $idtrabajador = $request->idtrabajador;
 
         $pedidos = pedido::whereraw('date(fecha)="' . date('Y-m-d') . '"')
@@ -315,23 +324,22 @@ class TPedidoController extends Controller
         }
 
         $meseros = Trabajador::where('idcargo', '=', '2')->where('estado', '=', '1')->get();
-        return view('trabajador.atencion.modificarpedidos', compact('pedidos', 'idtrabajador', 'meseros'));
+        return view('trabajador.atencion.modificarpedidos', compact('plantilla', 'pedidos', 'idtrabajador', 'meseros'));
     }
 
     public function Modificar($id)
     {
+        $plantilla = $this->ObtenerPlantilla();
         $productos = Producto::where('estado', '=', '1')->get();
         $prog = Programacion::where('estado', '=', '1')
             ->whereraw('date(fecha)="' . date('Y-m-d') . '"')
             ->orderby('fecha', 'desc')->first();
         $pedido = Pedido::findorfail($id);
-        return view('trabajador.atencion.modificar', compact('pedido', 'productos', 'prog'));
+        return view('trabajador.atencion.modificar', compact('plantilla', 'pedido', 'productos', 'prog'));
     }
 
     public function Modificado(Request $request, $id)
-    {
-        // return $request->all();
-
+    {               
         $pedido = Pedido::findorfail($id);
 
         $ids = $request->get('ids');
@@ -412,7 +420,7 @@ class TPedidoController extends Controller
     {
         $pedido = Pedido::findorfail($id);
         $msj = "";
-        if (count($pedido->DPedidoPendiente) == 0){
+        if (count($pedido->DPedidoPendiente) == 0) {
             $msj = "Nota: pedido atendido en su totalidad";
         }
         $pdf = PDF::loadView('reportes.ImprimirPedidoEstado', compact('pedido', 'msj'));

@@ -1,4 +1,4 @@
-@extends('layout.plan_cajero')
+@extends($plantilla)
 @section('estilos')
     <link rel="stylesheet" href="/js/datatables/jquery.dataTables.min.css">
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'UserController@mostrarLogin')->name('login');
 Route::post('/', 'UserController@verificarDatos');
 Route::post('logout', 'UserController@logout')->name('logout');
+Route::get('logout', 'UserController@logout');
 Route::get('/Registro', 'UserController@mostrarFrmRegistro')->name('Registro');
 Route::post('/Registro', 'UserController@Registro');
 Route::get('home', 'PerfilController@mostrarFrmInicio')->name('home');
@@ -123,3 +124,7 @@ route::post('CobrarPedido/{id}', 'ReciboController@Cobrado');
 route::get('home/ImprimirPedido/{id}', 'TPedidoController@ImprimirPedido')->name('imprimirTPedido');
 route::get('home/ImprimirPedidoEstado/{id}', 'TPedidoController@ImprimirPedidoEstado')->name('imprimirTPedidoEstado');
 route::get('GenerarProgramacion', 'ProgramacionController@GenerarProgramacion')->name('GenerarProgramacion');
+
+Route::get('VerMostrador', 'MostradorController@VerMostrador')->name('VerMostrador');
+Route::get('CobranzaPedidos', 'MostradorController@CobranzaPedidos')->name('CobranzaPedidos');
+

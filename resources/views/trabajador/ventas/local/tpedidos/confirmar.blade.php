@@ -13,13 +13,14 @@
             <div class="modal-body">
                 <span>*</span>
                 <span id="msj">Ingrese su clave:</span>
-                <div class="row">                    
+                <div class="row">
                     <div class="col-md-6">
-                        <input type="password" name="clave" id="clave" maxlength="50" 
-                        placeholder="******" class="form-control">
+                        <input type="password" name="clave" id="clave" maxlength="50" placeholder="******"
+                            class="form-control">
                     </div>
                     <div class="col-md-6">
-                        <button type="button" onclick="confirmarClave()" class="btn btn-primary"><i class="fas fa-check"></i> Registrar pedido</button>
+                        <button type="button" onclick="confirmarClave()" class="btn btn-primary"><i
+                                class="fas fa-check"></i> Registrar pedido</button>
                     </div>
                 </div>
             </div>

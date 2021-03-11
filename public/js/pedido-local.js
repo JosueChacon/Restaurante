@@ -52,6 +52,10 @@ function confirmarClave() {
             if (data.status == "ok") {
                 $("#idtrabajador").val(data.idtrabajador);
                 document.forms["frmPedido"].submit();
+            } else if (data.status == "usuario_no_valido") {
+                $("#msj").addClass("text-red");
+                $("#msj").html("Mensaje " + c + ": La clave debe ser de un mesero");
+                c++;
             } else {
                 $("#msj").addClass("text-red");
                 $("#msj").html("Mensaje " + c + ": Clave no válida, revisar tecla: Bloq Mayús");
